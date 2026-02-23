@@ -1,3 +1,5 @@
+// Root layout — sets global font, metadata, and HTML lang for the entire application.
+
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
@@ -8,7 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "FarmLite Advisory",
+  title: "OCP FarmLite Advisory",
   description: "Instant fertilizer estimates for smallholder farmers.",
 };
 
