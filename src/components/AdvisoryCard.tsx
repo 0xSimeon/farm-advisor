@@ -1,3 +1,5 @@
+// Results card displaying NPK and urea bag quantities, or an empty-state placeholder.
+
 import type { FertilizerResult } from '@/types';
 
 interface AdvisoryCardProps {
@@ -48,57 +50,100 @@ function InfoIcon() {
   );
 }
 
+function EmptyState() {
+  return (
+    <div className="hidden lg:flex mt-6 lg:mt-0 w-full rounded-2xl border border-dashed border-earth-light/50 flex-col items-center justify-center py-14 px-6 text-center">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true" className="text-earth-light mb-3">
+        <path d="M14 24V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+          d="M14 18 Q8 15 6 9 Q12 7 15 14"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <path
+          d="M14 15 Q19 12 22 7 Q16 6 13 12"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+      <p className="text-sm text-mist/50">
+        Your fertilizer estimate will appear here.
+      </p>
+    </div>
+  );
+}
+
 export default function AdvisoryCard({ result }: AdvisoryCardProps) {
-  if (!result) return null;
+  if (!result) return <EmptyState />;
 
   return (
     <div
-      className="mt-4 w-full rounded-2xl overflow-hidden border border-farm-green-light/25 shadow-[0_2px_16px_rgba(42,92,26,0.08)]"
+      className="animate-fade-up mt-6 lg:mt-0 w-full rounded-2xl overflow-hidden border border-farm-green-light/25 shadow-[0_2px_16px_rgba(42,92,26,0.08)]"
       style={{ backgroundColor: '#F0F7ED' }}
     >
       {/* Header */}
-      <div className="px-6 pt-5 pb-4 border-b border-farm-green-light/20">
-        <p className="text-xs font-semibold tracking-[0.12em] uppercase text-farm-green-light mb-0.5">
-          Fertilizer Estimate
-        </p>
-        <p className="text-sm text-mist">
-          {result.cropLabel}&nbsp;&mdash;&nbsp;{result.landSize}{' '}
-          hectare{result.landSize !== 1 ? 's' : ''}
-        </p>
+      <div className="px-6 pt-5 pb-4 border-b border-farm-green-light/20 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold tracking-[0.12em] uppercase text-farm-green-light mb-0.5">
+            Fertilizer Estimate
+          </p>
+          <p className="text-sm text-mist">
+            {result.cropLabel}&nbsp;&mdash;&nbsp;{result.landSize}{' '}
+            hectare{result.landSize !== 1 ? 's' : ''}
+          </p>
+        </div>
+        {/* Checkmark badge */}
+        <div className="w-8 h-8 rounded-full bg-farm-green flex items-center justify-center shrink-0">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M3 7L6 10L11 4"
+              stroke="white"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
 
-      {/* Metric rows */}
+      {/* Metric rows — NPK is primary, Urea is secondary */}
       <div className="px-6 divide-y divide-farm-green-light/15">
-        {/* NPK */}
-        <div className="flex items-center justify-between py-4">
+        {/* NPK — primary metric, full emphasis */}
+        <div className="flex items-center justify-between py-5">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full flex items-center justify-center text-farm-green-light bg-farm-green/10">
               <SproutIcon />
             </div>
             <div>
               <p className="text-sm font-semibold text-bark">NPK Fertilizer</p>
-              <p className="text-xs text-mist">Compound blend</p>
+              <p className="text-xs text-mist/70">Compound blend</p>
             </div>
           </div>
           <div className="text-right">
-            <span className="text-3xl font-bold text-bark tabular-nums">{result.npkBags}</span>
+            <span className="inline-block animate-number-pop text-3xl font-bold text-bark tabular-nums" style={{ animationDelay: '150ms' }}>{result.npkBags}</span>
             <span className="ml-1.5 text-xs font-medium text-mist">bags</span>
           </div>
         </div>
 
-        {/* Urea */}
-        <div className="flex items-center justify-between py-4">
+        {/* Urea — secondary metric, reduced visual weight */}
+        <div className="flex items-center justify-between py-5">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full flex items-center justify-center text-farm-green-light bg-farm-green/10">
               <GrainIcon />
             </div>
             <div>
               <p className="text-sm font-semibold text-bark">Urea</p>
-              <p className="text-xs text-mist">Nitrogen supplement</p>
+              <p className="text-xs text-mist/70">Nitrogen supplement</p>
             </div>
           </div>
           <div className="text-right">
-            <span className="text-3xl font-bold text-bark tabular-nums">{result.ureaBags}</span>
+            <span className="inline-block animate-number-pop text-2xl font-semibold text-bark/75 tabular-nums" style={{ animationDelay: '250ms' }}>{result.ureaBags}</span>
             <span className="ml-1.5 text-xs font-medium text-mist">bags</span>
           </div>
         </div>

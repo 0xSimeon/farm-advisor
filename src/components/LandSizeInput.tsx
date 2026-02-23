@@ -1,3 +1,5 @@
+// Numeric input for farm land size in hectares, with inline validation feedback.
+
 interface LandSizeInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -9,7 +11,7 @@ export default function LandSizeInput({ value, onChange, error }: LandSizeInputP
     <div>
       <label
         htmlFor="land-size"
-        className="block mb-1.5 text-xs font-semibold tracking-[0.12em] uppercase text-earth"
+        className="block mb-1 text-xs font-semibold tracking-[0.12em] uppercase text-earth"
       >
         Land Size (hectares)
       </label>
@@ -28,7 +30,7 @@ export default function LandSizeInput({ value, onChange, error }: LandSizeInputP
             'placeholder:text-mist/50 transition-colors duration-150',
             'focus:outline-none focus:ring-2 focus:ring-farm-green focus:border-farm-green',
             '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
-            error ? 'border-red-400 ring-1 ring-red-300' : 'border-earth-light',
+            error ? 'border-red-400 ring-1 ring-red-300' : 'border-earth-light hover:border-earth',
           ].join(' ')}
         />
 
