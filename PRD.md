@@ -20,6 +20,8 @@ The MVP must be:
 - Client-side only
 - Deployable on Vercel
 
+Use frontend-design skill
+
 The visual direction MUST be inspired by:
 
 Refarm Branding – Agriculture Identity  
