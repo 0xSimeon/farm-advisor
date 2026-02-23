@@ -1,3 +1,5 @@
+// Per-hectare fertilizer application rates sourced from OCP agronomic guidelines.
+
 import type { CropType } from '@/types';
 
 interface CropRate {
@@ -34,6 +36,7 @@ export const FERTILIZER_RATES: Record<CropType, CropRate> = {
   },
 };
 
+// Derived from FERTILIZER_RATES so the dropdown stays in sync with the rate table automatically.
 export const CROP_OPTIONS: { value: CropType; label: string }[] = (
   Object.entries(FERTILIZER_RATES) as [CropType, CropRate][]
 ).map(([value, { label }]) => ({ value, label }));
