@@ -12,6 +12,8 @@ V1.0 (MVP)
 
 FarmLite Advisory is a lightweight digital advisory tool that helps smallholder farmers estimate fertilizer requirements based on crop type and land size.
 
+Company name is OCP and the colors are green and white for the theme. you can create a good color theme using these colors and other colors, 2 max but green and white are the primary colors. 
+
 The MVP must be:
 
 - Visually modern
